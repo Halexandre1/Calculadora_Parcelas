@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Calculadora RM - Engenharia Reversa de Notas Fiscais e Parcelamento.">
     <meta name="author" content="HAlexandre">
-    <meta name="theme-color" content="#06b6d4"> <!-- Cyan-500 -->
+    <meta name="theme-color" content="#cbd5e1"> <!-- Slate-300 -->
     
-    <title>Calculadora RM Pro | V3.3</title>
+    <title>Calculadora RM Pro | V3.5 (Soft Gray)</title>
 
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
@@ -17,7 +17,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Fonte Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -28,15 +28,9 @@
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        dark: {
-                            900: '#121212',
-                            800: '#1e1e1e',
-                            700: '#2d2d2d',
-                            600: '#333333',
-                        },
                         brand: {
-                            cyan: '#00e5ff',
-                            blue: '#2979ff',
+                            cyan: '#0891b2', // Cyan-600
+                            blue: '#2563eb', // Blue-600
                         }
                     }
                 }
@@ -45,13 +39,14 @@
     </script>
 
     <style>
-        body { background-color: #121212; color: #e0e0e0; }
+        /* Fundo Cinza Médio (Slate 300) para menos brilho */
+        body { background-color: #cbd5e1; color: #1e293b; } 
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1e1e1e; }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
         /* Inputs numéricos sem setas */
         input[type=number]::-webkit-inner-spin-button, 
@@ -61,56 +56,58 @@
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .input-dark {
-            @apply w-full bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-white outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 font-mono text-right text-lg;
+        /* Input Branco: Destaca sobre o fundo cinza */
+        .input-light {
+            @apply w-full bg-white border border-slate-300 rounded-lg px-4 py-3 text-slate-900 font-bold outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 font-mono text-right text-lg placeholder-slate-400 shadow-sm;
         }
         
-        .label-dark {
-            @apply block text-xs text-gray-400 mb-2 font-medium uppercase tracking-wide;
+        /* Labels em cinza escuro */
+        .label-light {
+            @apply block text-sm text-slate-600 mb-2 font-bold uppercase tracking-wide;
         }
 
         .card-header {
-            @apply flex justify-between items-center border-b border-dark-600 pb-3 mb-6;
+            @apply flex justify-between items-center border-b border-slate-200 pb-3 mb-6;
         }
         
         .card-title {
-            @apply text-brand-blue font-bold text-sm uppercase tracking-wider flex items-center gap-2;
+            @apply text-blue-700 font-bold text-sm uppercase tracking-wider flex items-center gap-2;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-8 px-4">
+<body class="min-h-screen flex flex-col items-center py-8 px-4 font-sans">
 
-    <div class="w-full max-w-5xl bg-dark-800 rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-dark-600 overflow-hidden">
+    <!-- Container Principal: Fundo "Gelo" (Slate-50) em vez de branco puro -->
+    <div class="w-full max-w-5xl bg-slate-50 rounded-2xl shadow-2xl border border-slate-300 overflow-hidden">
         
         <!-- Header -->
-        <header class="bg-dark-900/50 p-6 border-b border-dark-600 flex flex-col md:flex-row items-center justify-between gap-6">
+        <header class="bg-slate-100 p-6 border-b border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-4">
                 <div class="relative group">
-                    <img src="https://raw.githubusercontent.com/Halexandre1/PDF_PRO/main/HERBERT.jpg" alt="Logo" class="w-14 h-14 rounded-xl shadow-lg border border-dark-600 group-hover:scale-105 transition-transform">
-                    <div class="absolute inset-0 rounded-xl ring-1 ring-white/10"></div>
+                    <img src="https://raw.githubusercontent.com/Halexandre1/PDF_PRO/main/HERBERT.jpg" alt="Logo" class="w-14 h-14 rounded-xl shadow-md border border-slate-300 group-hover:scale-105 transition-transform">
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold text-white tracking-tight">Calculadora RM <span class="text-brand-cyan text-sm align-top ml-1">V3.3 Pro</span></h1>
-                    <p class="text-gray-500 text-xs">Engenharia Reversa de Lançamentos Financeiros</p>
+                    <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Calculadora RM <span class="text-brand-cyan text-sm align-top ml-1 font-bold">V3.5</span></h1>
+                    <p class="text-slate-500 text-xs font-medium">Engenharia Reversa de Lançamentos Financeiros</p>
                 </div>
             </div>
             
             <!-- Resumo Rápido (Topo) -->
-            <div class="flex gap-4 bg-dark-900 rounded-xl p-3 border border-dark-700">
+            <div class="flex gap-4 bg-white rounded-xl p-3 border border-slate-200 shadow-sm">
                 <div class="text-right">
-                    <span class="text-[10px] text-gray-500 uppercase block">Diferença</span>
-                    <span id="headerDiff" class="text-xl font-mono font-bold text-gray-400">R$ 0,00</span>
+                    <span class="text-[10px] text-slate-500 uppercase block font-bold">Diferença</span>
+                    <span id="headerDiff" class="text-xl font-mono font-bold text-slate-700">R$ 0,00</span>
                 </div>
             </div>
         </header>
 
-        <div class="p-6 md:p-8 space-y-10"> <!-- Aumentado espaçamento vertical geral -->
+        <div class="p-6 md:p-8 space-y-10">
 
             <!-- SEÇÃO 1: DADOS FISCAIS -->
             <section>
                 <div class="card-header">
-                    <h2 class="card-title"><i class="fas fa-file-invoice-dollar"></i> 1. Dados da Nota (Impostos)</h2>
-                    <button id="btnZeroTaxes" class="text-xs text-red-400 hover:text-red-300 transition-colors border border-red-900/50 bg-red-900/10 px-3 py-1 rounded hover:bg-red-900/20">
+                    <h2 class="card-title"><i class="fas fa-file-invoice-dollar text-lg"></i> 1. Dados da Nota (Impostos)</h2>
+                    <button id="btnZeroTaxes" class="text-xs text-red-600 font-bold hover:text-white transition-colors border border-red-200 bg-red-50 px-3 py-1 rounded hover:bg-red-600">
                         <i class="fas fa-trash-alt mr-1"></i> ZERAR IMPOSTOS
                     </button>
                 </div>
@@ -118,49 +115,48 @@
                 <!-- Grid espaçado -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                     <div>
-                        <label class="label-dark">Valor Bruto TOTAL (R$)</label>
-                        <input type="number" step="0.01" id="totalBruto" class="input-dark text-brand-cyan font-bold !text-xl" value="2300.00">
+                        <label class="label-light">Valor Bruto TOTAL (R$)</label>
+                        <input type="number" step="0.01" id="totalBruto" class="input-light text-brand-cyan !text-2xl border-blue-200" value="2300.00">
                     </div>
                     <div>
-                        <label class="label-dark">INSS Total (R$)</label>
-                        <input type="number" step="0.01" id="inss" class="input-dark" value="253.00">
+                        <label class="label-light">INSS Total (R$)</label>
+                        <input type="number" step="0.01" id="inss" class="input-light" value="253.00">
                     </div>
                     <div>
-                        <label class="label-dark">ISS Total (R$)</label>
-                        <input type="number" step="0.01" id="iss" class="input-dark" value="11.50">
+                        <label class="label-light">ISS Total (R$)</label>
+                        <input type="number" step="0.01" id="iss" class="input-light" value="11.50">
                     </div>
                 </div>
                 <!-- Grid espaçado -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <label class="label-dark">Valor PCC (R$)</label>
-                        <input type="number" step="0.01" id="valPcc" class="input-dark border-cyan-900/30 focus:border-cyan-500" value="106.95">
+                        <label class="label-light">Valor PCC (R$)</label>
+                        <input type="number" step="0.01" id="valPcc" class="input-light" value="106.95">
                     </div>
                     <div>
-                        <label class="label-dark">Valor IRRF (R$)</label>
-                        <input type="number" step="0.01" id="valIrrf" class="input-dark border-cyan-900/30 focus:border-cyan-500" value="23.00">
+                        <label class="label-light">Valor IRRF (R$)</label>
+                        <input type="number" step="0.01" id="valIrrf" class="input-light" value="23.00">
                     </div>
-                    <!-- Espaço vazio para alinhar se necessário -->
                 </div>
             </section>
 
             <!-- SEÇÃO 2: CONFERÊNCIA -->
-            <section class="bg-dark-700/30 p-6 rounded-xl border border-dark-600/50">
-                <h2 class="text-xs text-gray-500 font-bold uppercase mb-6 text-center tracking-widest">Painel de Conferência em Tempo Real</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-dark-600">
+            <section class="bg-slate-200/60 p-6 rounded-xl border border-slate-300/50 shadow-inner">
+                <h2 class="text-xs text-slate-500 font-bold uppercase mb-6 text-center tracking-widest">Painel de Conferência em Tempo Real</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-300">
                     <div class="py-2">
-                        <span class="block text-xs text-gray-400 mb-2">Líquido Real (Teórico)</span>
-                        <div id="dispLiqReal" class="text-xl font-mono font-bold text-white">R$ 0,00</div>
-                        <span class="text-[10px] text-gray-600 block mt-2">Bruto - Impostos</span>
+                        <span class="block text-xs text-slate-600 font-bold mb-2">Líquido Real (Teórico)</span>
+                        <div id="dispLiqReal" class="text-xl font-mono font-extrabold text-slate-800">R$ 0,00</div>
+                        <span class="text-[10px] text-slate-500 block mt-2 font-medium">Bruto - Impostos</span>
                     </div>
                     <div class="py-2">
-                        <span class="block text-xs text-gray-400 mb-2">Soma dos Boletos (Digitado)</span>
-                        <div id="dispSomaBoletos" class="text-xl font-mono font-bold text-brand-blue">R$ 0,00</div>
-                        <span class="text-[10px] text-gray-600 block mt-2">Soma das parcelas abaixo</span>
+                        <span class="block text-xs text-slate-600 font-bold mb-2">Soma dos Boletos (Digitado)</span>
+                        <div id="dispSomaBoletos" class="text-xl font-mono font-extrabold text-brand-blue">R$ 0,00</div>
+                        <span class="text-[10px] text-slate-500 block mt-2 font-medium">Soma das parcelas abaixo</span>
                     </div>
                     <div class="py-2 relative">
-                        <span class="block text-xs text-gray-400 mb-2">Diferença</span>
-                        <div id="dispDiferenca" class="text-2xl font-mono font-bold text-gray-400">R$ 0,00</div>
+                        <span class="block text-xs text-slate-600 font-bold mb-2">Diferença</span>
+                        <div id="dispDiferenca" class="text-2xl font-mono font-extrabold text-slate-400">R$ 0,00</div>
                         <div id="statusIndicator" class="absolute top-2 right-4 text-xs"></div>
                     </div>
                 </div>
@@ -169,27 +165,27 @@
             <!-- SEÇÃO 3: PARCELAS -->
             <section>
                 <div class="card-header">
-                    <h2 class="card-title"><i class="fas fa-list-ol"></i> 3. Parcelamento</h2>
-                    <button id="btnReplicate" class="text-xs text-brand-cyan hover:text-white transition-colors border border-cyan-900/50 bg-cyan-900/10 px-3 py-1 rounded hover:bg-cyan-900/20">
+                    <h2 class="card-title text-brand-blue"><i class="fas fa-list-ol text-lg"></i> 3. Parcelamento</h2>
+                    <button id="btnReplicate" class="text-xs text-brand-cyan font-bold hover:text-white transition-colors border border-cyan-200 bg-cyan-50 px-3 py-1 rounded hover:bg-brand-cyan">
                         <i class="fas fa-copy mr-1"></i> REPLICAR 1ª PARA TODAS
                     </button>
                 </div>
 
                 <div class="flex items-end gap-6 mb-6">
                     <div class="w-40">
-                        <label class="label-dark">Qtd. Parcelas</label>
-                        <input type="number" id="qtdParcelas" class="input-dark text-center" value="4" min="1">
+                        <label class="label-light">Qtd. Parcelas</label>
+                        <input type="number" id="qtdParcelas" class="input-light text-center" value="4" min="1">
                     </div>
-                    <button id="btnGenerate" class="bg-dark-700 hover:bg-dark-600 text-white px-6 py-3 rounded-lg border border-dark-600 transition-all text-sm font-medium h-[54px]">
+                    <button id="btnGenerate" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg border border-slate-500 transition-all text-sm font-bold h-[54px] shadow-md">
                         <i class="fas fa-sync-alt mr-2"></i> Redefinir Campos
                     </button>
                 </div>
 
-                <div id="dynamicArea" class="bg-dark-900 rounded-lg p-6 border border-dark-700 max-h-[350px] overflow-y-auto mb-8 space-y-3 custom-scrollbar">
+                <div id="dynamicArea" class="bg-slate-100 rounded-lg p-6 border border-slate-200 max-h-[350px] overflow-y-auto mb-8 space-y-3 custom-scrollbar shadow-inner">
                     <!-- Inputs gerados via JS -->
                 </div>
 
-                <button id="btnCalculate" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-5 rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all transform active:scale-[0.99] uppercase tracking-wider flex items-center justify-center gap-3 text-lg">
+                <button id="btnCalculate" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-extrabold py-5 rounded-xl shadow-lg transition-all transform active:scale-[0.99] uppercase tracking-wider flex items-center justify-center gap-3 text-lg">
                     <i class="fas fa-calculator"></i> Calcular Lançamentos do RM
                 </button>
             </section>
@@ -197,12 +193,12 @@
             <!-- SEÇÃO 4: RESULTADOS -->
             <section id="resultArea" class="hidden fade-in">
                 <div class="card-header">
-                    <h2 class="card-title text-green-400"><i class="fas fa-check-circle"></i> Resultado Final</h2>
+                    <h2 class="card-title text-green-600"><i class="fas fa-check-circle text-lg"></i> Resultado Final</h2>
                 </div>
                 
-                <div class="overflow-x-auto rounded-lg border border-dark-600">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-dark-700 text-gray-400 uppercase font-medium text-xs">
+                <div class="overflow-x-auto rounded-lg border border-slate-300 shadow-md">
+                    <table class="w-full text-left text-sm bg-white">
+                        <thead class="bg-slate-100 text-slate-700 uppercase font-bold text-xs border-b border-slate-300">
                             <tr>
                                 <th class="px-6 py-4 text-center w-20">#</th>
                                 <th class="px-6 py-4 text-right">Bruto a Lançar</th>
@@ -210,12 +206,12 @@
                                 <th class="px-6 py-4">Detalhe Técnico</th>
                             </tr>
                         </thead>
-                        <tbody id="tabelaResultados" class="divide-y divide-dark-700 bg-dark-800">
+                        <tbody id="tabelaResultados" class="divide-y divide-slate-200 text-slate-800">
                             <!-- Linhas -->
                         </tbody>
                     </table>
                 </div>
-                <p class="mt-4 text-xs text-gray-500 flex items-center gap-2">
+                <p class="mt-4 text-xs text-slate-500 font-medium flex items-center gap-2">
                     <i class="fas fa-info-circle"></i> Copie os valores da coluna "Bruto a Lançar" para o sistema.
                 </p>
             </section>
@@ -223,8 +219,8 @@
         </div>
 
         <!-- Footer -->
-        <footer class="bg-dark-900 border-t border-dark-600 py-6 text-center">
-            <p id="signature" class="text-gray-500 text-sm font-medium"></p>
+        <footer class="bg-slate-100 border-t border-slate-300 py-6 text-center">
+            <p id="signature" class="text-slate-500 text-sm font-semibold"></p>
         </footer>
 
     </div>
@@ -241,8 +237,8 @@
         totalBruto: document.getElementById('totalBruto'),
         inss: document.getElementById('inss'),
         iss: document.getElementById('iss'),
-        valPcc: document.getElementById('valPcc'),   // Novo ID
-        valIrrf: document.getElementById('valIrrf'), // Novo ID
+        valPcc: document.getElementById('valPcc'),   
+        valIrrf: document.getElementById('valIrrf'), 
         qtdParcelas: document.getElementById('qtdParcelas'),
         
         // Containers
@@ -277,7 +273,6 @@
             const valIrrf = Logic.parse(DOM.valIrrf);
 
             // Calcula taxa implícita para a lógica reversa
-            // Taxa = Valor / Bruto
             const txPcc = bruto > 0 ? (valPcc / bruto) : 0;
             const txIrrf = bruto > 0 ? (valIrrf / bruto) : 0;
 
@@ -297,20 +292,18 @@
             let brutosCalculados = new Array(qtd).fill(0);
             let somaBrutosParciais = 0;
 
-            // 1. Calcula parcelas "padrão" (da 3ª em diante ou única)
+            // 1. Calcula parcelas "padrão"
             inputsLiquidos.forEach((liqVal, index) => {
                 const numParcela = index + 1;
                 
-                // Pula P1 e P2 se houverem múltiplas parcelas (lógica especial)
                 if (qtd > 1 && (numParcela === 1 || numParcela === 2)) return;
 
-                // Parcela Padrão: Bruto = Liq / (1 - Taxas)
                 const bruto = liqVal / (1 - data.txPcc - data.txIrrf);
                 brutosCalculados[index] = bruto;
                 somaBrutosParciais += bruto;
             });
 
-            // 2. Parcela 1 (Carregadora de Impostos Fixos)
+            // 2. Parcela 1
             let bruto1 = 0;
             const liq1 = inputsLiquidos[0] || 0;
 
@@ -318,16 +311,13 @@
                 bruto1 = data.bruto;
                 brutosCalculados[0] = bruto1;
             } else {
-                // P1 absorve INSS e ISS. O IRRF é jogado para P2.
-                // Bruto1 = (Liq1 + Fixos) / (1 - PCC)
                 bruto1 = (liq1 + data.inss + data.iss) / (1 - data.txPcc);
                 brutosCalculados[0] = bruto1;
                 somaBrutosParciais += bruto1;
             }
 
-            // 3. Parcela 2 (Ajustadora Final)
+            // 3. Parcela 2
             if (qtd >= 2) {
-                // O que sobra do Bruto Total vai para a P2 para fechar a conta exata
                 const bruto2 = data.bruto - somaBrutosParciais;
                 brutosCalculados[1] = bruto2;
             }
@@ -342,7 +332,7 @@
             this.setBranding();
             this.generateFields();
             this.bindEvents();
-            this.updateSummary(); // Calc inicial
+            this.updateSummary(); 
         },
 
         setBranding() {
@@ -366,7 +356,6 @@
             };
             DOM.btnCalculate.onclick = () => this.renderResults();
 
-            // Auto-update inputs principais
             [DOM.totalBruto, DOM.inss, DOM.iss, DOM.valPcc, DOM.valIrrf].forEach(el => {
                 el.addEventListener('input', () => this.updateSummary());
             });
@@ -381,14 +370,13 @@
 
             for (let i = 1; i <= qtd; i++) {
                 const row = document.createElement('div');
-                row.className = 'flex items-center gap-4 fade-in'; // Gap aumentado aqui também
+                row.className = 'flex items-center gap-4 fade-in';
                 row.innerHTML = `
-                    <div class="w-10 h-10 flex items-center justify-center bg-dark-700 rounded-full text-sm font-bold text-gray-500 border border-dark-600">${i}</div>
-                    <input type="number" step="0.01" class="input-liquido flex-1 bg-dark-800 border border-dark-600 rounded-lg px-4 py-3 text-white text-right focus:border-brand-blue outline-none transition-colors text-lg" placeholder="Líquido ${i}" id="liq_${i}">
+                    <div class="w-10 h-10 flex items-center justify-center bg-slate-200 rounded-full text-sm font-bold text-slate-600 border border-slate-300">${i}</div>
+                    <input type="number" step="0.01" class="input-liquido input-light flex-1" placeholder="Líquido ${i}" id="liq_${i}">
                 `;
                 DOM.dynamicArea.appendChild(row);
                 
-                // Bind input dinâmico
                 const input = row.querySelector('input');
                 input.addEventListener('input', () => UI.updateSummary());
                 State.inputs.push(input);
@@ -399,19 +387,14 @@
 
         updateSummary() {
             const data = Logic.getData();
-            
-            // 1. Líquido Real Teórico (Usando valores absolutos direto para evitar erro de arredondamento de taxa)
             const liqReal = data.bruto - data.inss - data.iss - data.valPcc - data.valIrrf;
 
-            // 2. Soma Digitada
             let somaDigitada = 0;
             const domInputs = document.querySelectorAll('.input-liquido');
             domInputs.forEach(inp => somaDigitada += Logic.parse(inp));
 
-            // 3. Diferença
             const diff = somaDigitada - liqReal;
 
-            // Render
             DOM.dispLiqReal.textContent = Logic.formatCurrency(liqReal);
             DOM.dispSomaBoletos.textContent = Logic.formatCurrency(somaDigitada);
             
@@ -419,16 +402,15 @@
             DOM.dispDiferenca.textContent = diffFormatted;
             DOM.headerDiff.textContent = diffFormatted;
 
-            // Status Visual
             const isZero = Math.abs(diff) < 0.02;
             if (isZero) {
-                DOM.dispDiferenca.className = 'text-2xl font-mono font-bold text-green-500';
-                DOM.headerDiff.className = 'text-xl font-mono font-bold text-green-500';
-                DOM.statusIndicator.innerHTML = '<i class="fas fa-check-circle text-green-500 text-lg"></i>';
+                DOM.dispDiferenca.className = 'text-2xl font-mono font-extrabold text-green-600';
+                DOM.headerDiff.className = 'text-xl font-mono font-bold text-green-600';
+                DOM.statusIndicator.innerHTML = '<i class="fas fa-check-circle text-green-600 text-lg"></i>';
             } else {
-                DOM.dispDiferenca.className = 'text-2xl font-mono font-bold text-red-500';
-                DOM.headerDiff.className = 'text-xl font-mono font-bold text-red-500';
-                DOM.statusIndicator.innerHTML = '<i class="fas fa-exclamation-triangle text-red-500 text-lg"></i>';
+                DOM.dispDiferenca.className = 'text-2xl font-mono font-extrabold text-red-600';
+                DOM.headerDiff.className = 'text-xl font-mono font-bold text-red-600';
+                DOM.statusIndicator.innerHTML = '<i class="fas fa-exclamation-triangle text-red-600 text-lg"></i>';
             }
         },
 
@@ -459,16 +441,16 @@
                     highlightClass = 'text-brand-cyan font-bold';
                 } else {
                     obs = temRetencao ? 'Cálculo linear com retenções.' : 'Valor proporcional simples.';
-                    highlightClass = 'text-white';
+                    highlightClass = 'text-slate-800 font-semibold';
                 }
 
                 const row = document.createElement('tr');
-                row.className = 'hover:bg-dark-700/50 transition-colors';
+                row.className = 'hover:bg-slate-50 transition-colors border-b border-slate-200';
                 row.innerHTML = `
-                    <td class="px-6 py-4 text-center text-gray-500 font-mono">${num}</td>
+                    <td class="px-6 py-4 text-center text-slate-500 font-mono font-bold">${num}</td>
                     <td class="px-6 py-4 text-right font-mono ${highlightClass}">${Logic.formatCurrency(bruto)}</td>
-                    <td class="px-6 py-4 text-right text-gray-400 font-mono">${Logic.formatCurrency(liq)}</td>
-                    <td class="px-6 py-4 text-gray-500 text-xs italic">${obs}</td>
+                    <td class="px-6 py-4 text-right text-slate-600 font-mono">${Logic.formatCurrency(liq)}</td>
+                    <td class="px-6 py-4 text-slate-500 text-xs italic font-medium">${obs}</td>
                 `;
                 DOM.tabelaResultados.appendChild(row);
             });
@@ -478,7 +460,6 @@
         }
     };
 
-    // Inicialização
     window.onload = () => UI.init();
 
 </script>
